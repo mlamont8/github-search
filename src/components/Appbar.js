@@ -6,7 +6,7 @@ import Toolbar from "@material-ui/core/Toolbar";
 const Appbar = () => (
   <AppBar position="static">
     <Toolbar>
-      <i className="fab fa-github fa-2x" />
+      <i className="fab fa-github fa-2x appBar-icon" />
       <Typography variant="h6" color="inherit" noWrap>
         Github Search
       </Typography>

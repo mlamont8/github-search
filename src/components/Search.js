@@ -24,8 +24,8 @@ class Search extends React.Component {
 
   render() {
     return (
-      <div>
-        <div>
+      <div className="searchContainer">
+        <div className="headerContent">
           <Typography
             component="h1"
             variant="h2"
@@ -44,22 +44,22 @@ class Search extends React.Component {
             Perform a simple Github Search. Select any user to be sent to that
             page.
           </Typography>
-          <div>
-            <Grid container spacing={16} justify="center">
-              <Grid item>
-                <form className="search-form" onSubmit={this.handleSubmit}>
-                  <TextField
-                    id="search-field"
-                    label="Search Users"
-                    className="search-field"
-                    value={this.state.value}
-                    onChange={this.handleChange}
-                    margin="normal"
-                  />
-                </form>
-              </Grid>
+        </div>
+        <div className="formContainer">
+          <Grid container justify="center">
+            <Grid item>
+              <form className="search-form" onSubmit={this.handleSubmit}>
+                <TextField
+                  id="search-field"
+                  label="Search Users"
+                  className="search-field"
+                  value={this.state.value}
+                  onChange={this.handleChange}
+                  margin="normal"
+                />
+              </form>
             </Grid>
-          </div>
+          </Grid>
         </div>
       </div>
     );

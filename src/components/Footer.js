@@ -2,7 +2,7 @@ import React from "react";
 import Typography from "@material-ui/core/Typography";
 
 const Footer = () => (
-  <React.Fragment>
+  <div className="footerContainer">
     <Typography variant="h6" align="center" gutterBottom>
       Footer
     </Typography>
@@ -14,7 +14,7 @@ const Footer = () => (
     >
       Footer will be Here!
     </Typography>
-  </React.Fragment>
+  </div>
 );
 
 export default Footer;

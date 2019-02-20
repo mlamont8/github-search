@@ -1,0 +1,12 @@
+main {
+  padding: 100px 100px;
+}
+
+.appBar-icon {
+  padding-right: 10px;
+}
+
+.formContainer,
+.footerContainer {
+  margin-bottom: 50px;
+}
