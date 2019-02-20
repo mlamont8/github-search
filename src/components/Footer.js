@@ -4,7 +4,7 @@ import Typography from "@material-ui/core/Typography";
 const Footer = () => (
   <div className="footerContainer">
     <Typography variant="h6" align="center" gutterBottom>
-      Footer
+      Github Search
     </Typography>
     <Typography
       variant="subtitle1"
@@ -12,7 +12,7 @@ const Footer = () => (
       color="textSecondary"
       component="p"
     >
-      Footer will be Here!
+      &copy; 2019 Marimi Lamont Taylor
     </Typography>
   </div>
 );

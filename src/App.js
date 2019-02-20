@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Appbar from "./components/Appbar";
+import Pagination from "./components/Pagination";
 import Search from "./components/Search";
 import Results from "./components/Results";
 import Footer from "./components/Footer";
@@ -21,6 +22,7 @@ class App extends Component {
         <Appbar />
         <main>
           <Search />
+          <Pagination />
           <Results cards={this.state.cards} />
         </main>
         <footer>
