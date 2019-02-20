@@ -1,25 +1,31 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
+import Appbar from "./components/Appbar";
+import Search from "./components/Search";
+import Results from "./components/Results";
+import Footer from "./components/Footer";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import "./App.css";
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      cards: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+    };
+  }
+
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+        <CssBaseline />
+        <Appbar />
+        <main>
+          <Search />
+          <Results cards={this.state.cards} />
+        </main>
+        <footer>
+          <Footer />
+        </footer>
       </div>
     );
   }
