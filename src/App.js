@@ -5,6 +5,8 @@ import Search from "./components/Search";
 import Results from "./components/Results";
 import Footer from "./components/Footer";
 import CssBaseline from "@material-ui/core/CssBaseline";
+import { Query } from "react-apollo";
+import gql from "graphql-tag";
 import "./App.css";
 
 class App extends Component {
@@ -18,6 +20,39 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+        <Query
+          query={gql`
+            {
+              search(type: USER, query: "lisa", first: 12) {
+                userCount
+                edges {
+                  node {
+                    ... on User {
+                      name
+                      login
+                      avatarUrl
+                      followers {
+                        totalCount
+                      }
+                      starredRepositories {
+                        totalCount
+                      }
+                      url
+                      bio
+                    }
+                  }
+                }
+              }
+            }
+          `}
+        >
+          {({ loading, error, data }) => {
+            if (loading) return <p>Loading...</p>;
+            if (error) return <p>Error :(</p>;
+
+            return console.log(data);
+          }}
+        </Query>
         <CssBaseline />
         <Appbar />
         <main>
