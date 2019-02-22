@@ -2,7 +2,7 @@ import React from "react";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import TextField from "@material-ui/core/TextField";
-import { validateAll } from "indicative";
+import { validateAll, rule } from "indicative";
 
 class Search extends React.Component {
   constructor(props) {
@@ -27,23 +27,28 @@ class Search extends React.Component {
     this.setState({ errors: {} });
     const data = this.state;
     const messages = {
-      required: "Empty searches not allowed",
-      min: "Must start with at least 2 characters",
-      max: "Must be less than 10 characters"
+      required: "Empty searches are not allowed",
+      min: "Must be a minimum of 2 characters",
+      max: "Must be a maximum of 10 characters",
+      regex: "Search parameters invalid!  Try Again"
     };
     const rules = {
-      value: "required|string|min:2|max:10"
+      value: [
+        rule("required"),
+        rule("min", 2),
+        rule("max", 10),
+        rule("regex", /^[a-z\d](?:[a-z\d]|-(?=[a-z\d])){0,38}$/i)
+      ]
     };
     validateAll(data, rules, messages)
       .then(() => {
-        // When data has been validated
-        console.log("success", data);
+        // After successfull validation, perform search
+        this.props.handleSearch(data.value);
       })
       // catches errors and places them in state for errors
       .catch(errors => {
         const formattedErrors = {};
         errors.forEach(error => (formattedErrors[error.field] = error.message));
-        console.log(formattedErrors);
         this.setState({ errors: formattedErrors });
       });
   }
@@ -53,7 +58,6 @@ class Search extends React.Component {
   }
 
   render() {
-    console.log(this.state.errors.value);
     const errorMessage = this.state.errors.value;
     return (
       <div className="searchContainer">
