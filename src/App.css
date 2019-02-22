@@ -26,3 +26,9 @@ main {
 .loginName {
   text-transform: uppercase;
 }
+
+.errorContainer p {
+  text-align: center;
+  color: red;
+  font-style: italic;
+}

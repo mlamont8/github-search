@@ -3,8 +3,6 @@ import Grid from "@material-ui/core/Grid";
 import Cards from "./Cards";
 
 const Results = props => {
-  console.log("griddata", props.gridData);
-
   return (
     <div>
       {props.gridData ? (
