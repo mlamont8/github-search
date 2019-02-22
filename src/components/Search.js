@@ -52,10 +52,6 @@ class Search extends React.Component {
         this.setState({ errors: formattedErrors });
       });
   }
-  handleSubmit(e) {
-    e.preventDefault();
-    this.props.handleSearch(this.state.value);
-  }
 
   render() {
     const errorMessage = this.state.errors.value;
@@ -69,7 +65,7 @@ class Search extends React.Component {
             color="textPrimary"
             gutterBottom
           >
-            Github Search
+            Github User Search
           </Typography>
           <Typography
             variant="h6"
