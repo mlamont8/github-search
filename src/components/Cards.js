@@ -10,17 +10,29 @@ import Button from "@material-ui/core/Button";
 const Cards = props => (
   <Card>
     <CardContent>
-      <Typography gutterBottom variant="h5" component="h2">
-        Login Name
+      <div className="topCardContainer">
+        <div className="cardImage">
+          <img src={props.avatar} alt={props.login} />
+        </div>
+        <div className="cardTopRight">
+          <Typography>{props.score}</Typography>
+        </div>
+      </div>
+      <Typography
+        className="loginName"
+        gutterBottom
+        variant="h5"
+        component="h2"
+      >
+        {props.login}
       </Typography>
-      <Typography>Real name</Typography>
     </CardContent>
     <CardActions>
       <Button size="small" color="primary">
-        View
+        More info
       </Button>
       <Button size="small" color="primary">
-        Edit
+        Github Page
       </Button>
     </CardActions>
   </Card>

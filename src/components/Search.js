@@ -20,6 +20,7 @@ class Search extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
     console.log("Search submitted as", this.state.value);
+    this.props.handleSearch(this.state.value);
   }
 
   render() {

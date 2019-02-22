@@ -10,3 +10,19 @@ main {
 .footerContainer {
   margin-bottom: 50px;
 }
+
+.topCardContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.cardImage img {
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+}
+
+.loginName {
+  text-transform: uppercase;
+}
