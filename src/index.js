@@ -9,7 +9,7 @@ import * as serviceWorker from "./serviceWorker";
 const client = new ApolloClient({
   uri: "https://api.github.com/graphql",
   headers: {
-    Authorization: "Bearer 534561ebe721116b2dc41480a93ef4b29f0955df"
+    Authorization: "Bearer 95b78a4b024d2a915d22363911b201ae9c225200"
   }
 });
 

@@ -5,8 +5,8 @@ import Cards from "./Cards";
 const Results = props => (
   <div>
     <Grid container spacing={40}>
-      {props.cards.map(card => (
-        <Grid item key={card} sm={6} md={4} lg={3}>
+      {props.cards.map((card, index) => (
+        <Grid item key={index} sm={6} md={4} lg={3}>
           <Cards />
         </Grid>
       ))}
