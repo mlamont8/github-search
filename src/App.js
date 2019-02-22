@@ -13,7 +13,6 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      cards: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
       searchTerm: "",
       pageNumber: 1,
       gridData: null
@@ -23,9 +22,6 @@ class App extends Component {
   }
 
   async handleSearch(result) {
-    // await this.setState({
-    //   searchTerm: result
-    // });
     const url = `https://api.github.com/search/users?q=${result}&page=${
       this.state.pageNumber
     }&per_page=12`;

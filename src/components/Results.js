@@ -1,6 +1,7 @@
 import React from "react";
 import Grid from "@material-ui/core/Grid";
 import Cards from "./Cards";
+import NewSearch from "./NewSearch";
 
 const Results = props => {
   return (
@@ -18,7 +19,7 @@ const Results = props => {
           ))}
         </Grid>
       ) : (
-        <div>No Data</div>
+        <NewSearch />
       )}
     </div>
   );

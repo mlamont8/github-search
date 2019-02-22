@@ -12,7 +12,6 @@ class Search extends React.Component {
       errors: {}
     };
     this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
     this.validateTerm = this.validateTerm.bind(this);
   }
 
