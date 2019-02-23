@@ -22,13 +22,25 @@ class App extends Component {
 
     this.handleSearch = this.handleSearch.bind(this);
     this.onPageChange = this.onPageChange.bind(this);
+    this.newSearch = this.newSearch.bind(this);
   }
 
-  onPageChange(page) {
-    this.setState({
+  // On Pagination page change, make sure pageNumber in state is updated before
+  // proceeding with search
+  async onPageChange(page) {
+    await this.setState({
       pageNumber: page
     });
     this.handleSearch(this.state.searchTerm);
+  }
+
+  // Make sure the page number is reset
+  // for each new search
+  async newSearch(searchTerm) {
+    await this.setState({
+      pageNumber: 1
+    });
+    this.handleSearch(searchTerm);
   }
 
   async handleSearch(result) {
@@ -56,7 +68,7 @@ class App extends Component {
         <CssBaseline />
         <Appbar />
         <main>
-          <Search handleSearch={this.handleSearch} />
+          <Search newSearch={this.newSearch} />
           <Pagination
             resultsPerPage={this.state.resultsPerPage}
             totalResults={this.state.totalResults}

@@ -42,7 +42,7 @@ class Search extends React.Component {
     validateAll(data, rules, messages)
       .then(() => {
         // After successfull validation, perform search
-        this.props.handleSearch(data.value);
+        this.props.newSearch(data.value);
       })
       // catches errors and places them in state for errors
       .catch(errors => {
