@@ -15,6 +15,9 @@ const Results = props => {
                 login={data.login}
                 avatar={data.avatar_url}
                 score={data.score}
+                id={data.id}
+                html_url={data.html_url}
+                url={data.url}
               />
             </Grid>
           ))}
