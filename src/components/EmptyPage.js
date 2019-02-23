@@ -1,5 +1,7 @@
 import React from "react";
 
+// Empty page to offer when no results
+
 const EmptyPage = props => {
   const message = props.apiError ? "API ERROR - Try again later" : null;
   return (
