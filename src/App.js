@@ -17,7 +17,8 @@ class App extends Component {
       pageNumber: 1,
       gridData: null,
       totalResults: 0,
-      resultsPerPage: 12
+      resultsPerPage: 12,
+      apiError: false
     };
 
     this.handleSearch = this.handleSearch.bind(this);
@@ -38,7 +39,8 @@ class App extends Component {
   // for each new search
   async newSearch(searchTerm) {
     await this.setState({
-      pageNumber: 1
+      pageNumber: 1,
+      apiError: false
     });
     this.handleSearch(searchTerm);
   }
@@ -59,6 +61,9 @@ class App extends Component {
       });
     } catch (error) {
       console.error(error);
+      this.setState({
+        apiError: true
+      });
     }
   }
 
@@ -76,7 +81,10 @@ class App extends Component {
             onPageChange={this.onPageChange}
           />
 
-          <Results gridData={this.state.gridData} />
+          <Results
+            gridData={this.state.gridData}
+            apiError={this.state.apiError}
+          />
         </main>
         <footer>
           <Footer />

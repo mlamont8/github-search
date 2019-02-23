@@ -1,7 +1,7 @@
 import React from "react";
 import Grid from "@material-ui/core/Grid";
 import Cards from "./Cards";
-import NewSearch from "./NewSearch";
+import EmptyPage from "./EmptyPage";
 
 const Results = props => {
   return (
@@ -19,7 +19,7 @@ const Results = props => {
           ))}
         </Grid>
       ) : (
-        <NewSearch />
+        <EmptyPage apiError={props.apiError} />
       )}
     </div>
   );

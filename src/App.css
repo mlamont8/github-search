@@ -33,7 +33,7 @@ main {
   font-style: italic;
 }
 
-.newSearchContainer {
+.emptyPageContainer {
   height: 400px;
   width: 100%;
   display: flex;
@@ -42,11 +42,11 @@ main {
   align-items: center;
 }
 
-.newSearchContainer i {
+.emptyPageContainer i {
   color: #d3d3d3;
 }
 
-.newSearchContainer p {
+.emptyPageContainer p {
   color: gray;
 }
 
