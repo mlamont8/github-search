@@ -2,6 +2,7 @@ import React from "react";
 import Grid from "@material-ui/core/Grid";
 import Cards from "./Cards";
 import EmptyPage from "./EmptyPage";
+import PropTypes from "prop-types";
 
 const Results = props => {
   return (
@@ -26,3 +27,8 @@ const Results = props => {
 };
 
 export default Results;
+
+Results.propTypes = {
+  gridData: PropTypes.array,
+  apiError: PropTypes.bool
+};

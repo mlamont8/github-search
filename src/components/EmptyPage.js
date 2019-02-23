@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 // Empty page to offer when no results
 
@@ -15,3 +16,7 @@ const EmptyPage = props => {
 };
 
 export default EmptyPage;
+
+EmptyPage.propTypes = {
+  apiError: PropTypes.bool
+};

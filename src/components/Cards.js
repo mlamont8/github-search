@@ -4,6 +4,7 @@ import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
+import PropTypes from "prop-types";
 
 // Child of Results.js
 
@@ -39,3 +40,9 @@ const Cards = props => (
 );
 
 export default Cards;
+
+Cards.propTypes = {
+  login: PropTypes.string,
+  avatar: PropTypes.string,
+  score: PropTypes.number
+};

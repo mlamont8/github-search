@@ -3,6 +3,7 @@ import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import TextField from "@material-ui/core/TextField";
 import { validateAll, rule } from "indicative";
+import PropTypes from "prop-types";
 
 class Search extends React.Component {
   constructor(props) {
@@ -102,3 +103,7 @@ class Search extends React.Component {
 }
 
 export default Search;
+
+Search.propTypes = {
+  newSearch: PropTypes.func.isRequired
+};

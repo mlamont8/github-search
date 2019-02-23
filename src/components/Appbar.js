@@ -8,7 +8,7 @@ const Appbar = () => (
     <Toolbar>
       <i className="fab fa-github fa-2x appBar-icon" />
       <Typography variant="h6" color="inherit" noWrap>
-        Github Search
+        Github User Search
       </Typography>
     </Toolbar>
   </AppBar>

@@ -1,6 +1,7 @@
 import React from "react";
 import PagePagination from "rc-pagination";
 import "rc-pagination/assets/index.css";
+import PropTypes from "prop-types";
 
 // Pagination container
 // Only show when there are results
@@ -23,3 +24,10 @@ const Pagination = props => (
 );
 
 export default Pagination;
+
+Pagination.propTypes = {
+  resultsPerPage: PropTypes.number,
+  totalResults: PropTypes.number,
+  pageNumber: PropTypes.number,
+  onPageChange: PropTypes.func.isRequired
+};
