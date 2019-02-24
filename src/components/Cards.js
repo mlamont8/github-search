@@ -62,6 +62,7 @@ class Cards extends React.Component {
               <img src={this.props.avatar} alt={this.props.login} />
             </div>
             <div className="cardTopRight">
+            <Typography>Score:</Typography>
               <Typography>{this.props.score}</Typography>
             </div>
           </div>
