@@ -49,11 +49,9 @@ class App extends Component {
     const url = `https://api.github.com/search/users?q=${result}&page=${
       this.state.pageNumber
     }&per_page=${this.state.resultsPerPage}`;
-    console.log(url);
 
     try {
       const response = await axios.get(url);
-      console.log(response.data);
       this.setState({
         gridData: response.data.items,
         searchTerm: result,

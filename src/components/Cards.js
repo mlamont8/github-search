@@ -12,20 +12,42 @@ import PropTypes from "prop-types";
 class Cards extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      name: "",
+      company: "",
+      bio: "",
+      followers: "",
+      repo: ""
+    };
     this.moreInfo = this.moreInfo.bind(this);
+  }
+
+  // To reset state when there is a page change or
+  // new search
+  componentDidUpdate(prevProps) {
+    console.log("componentdidupdate");
+    if (this.props.login !== prevProps.login) {
+      this.setState({
+        name: "",
+        company: "",
+        bio: "",
+        followers: "",
+        repo: ""
+      });
+    }
   }
 
   async moreInfo() {
     const url = `${this.props.url}`;
-    console.log("more", url);
     try {
       const response = await axios.get(url);
-      console.log(response.data);
-      // this.setState({
-      //   gridData: response.data.items,
-      //   searchTerm: result,
-      //   totalResults: response.data.total_count
-      // });
+      await this.setState({
+        name: response.data.name,
+        company: response.data.company,
+        bio: response.data.bio,
+        followers: response.data.followers,
+        repo: response.data.public_repos
+      });
     } catch (error) {
       console.error(error);
       this.setState({
@@ -36,7 +58,7 @@ class Cards extends React.Component {
 
   render() {
     return (
-      <Card>
+      <Card className="cardContainer">
         <CardContent>
           <div className="topCardContainer">
             <div className="cardImage">
@@ -71,6 +93,20 @@ class Cards extends React.Component {
             </Button>
           </a>
         </CardActions>
+        <CardContent className="moreCardContent">
+          <Typography variant="h6">{this.state.name}</Typography>
+          <Typography>{this.state.company}</Typography>
+          <Typography className="cardBio">{this.state.bio}</Typography>
+          <Typography className="bottomCard">
+            <span className={!this.state.followers ? " hide" : " show"}>
+              Followers: {this.state.followers}
+            </span>
+            {"  "}
+            <span className={!this.state.repo ? " hide" : " show"}>
+              Repos: {this.state.repo}
+            </span>
+          </Typography>
+        </CardContent>
       </Card>
     );
   }
