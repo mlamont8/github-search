@@ -50,9 +50,6 @@ class Cards extends React.Component {
       });
     } catch (error) {
       console.error(error);
-      this.setState({
-        apiError: true
-      });
     }
   }
 

@@ -11,6 +11,10 @@ main {
   margin-bottom: 50px;
 }
 
+.search-form button {
+  margin: 25px 0 0 20px;
+}
+
 .cardContainer {
   height: 400px;
 }

@@ -3,6 +3,7 @@ import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import TextField from "@material-ui/core/TextField";
 import { validateAll, rule } from "indicative";
+import Button from "@material-ui/core/Button";
 import PropTypes from "prop-types";
 
 class Search extends React.Component {
@@ -73,8 +74,10 @@ class Search extends React.Component {
             color="textSecondary"
             paragraph
           >
-            Perform a simple Github Search. Select any user to be sent to that
-            page.
+            Perform a simple Github Search.
+          </Typography>
+          <Typography variant="subheading" align="center" color="textSecondary">
+            Enter a name or a portion of a name to begin.
           </Typography>
         </div>
         <div className="formContainer">
@@ -90,6 +93,14 @@ class Search extends React.Component {
                   onChange={this.handleChange}
                   margin="normal"
                 />
+                <Button
+                  type="submit"
+                  value="Submit"
+                  color="primary"
+                  variant="contained"
+                >
+                  Search
+                </Button>
               </form>
             </Grid>
           </Grid>

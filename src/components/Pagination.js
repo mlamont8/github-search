@@ -1,6 +1,8 @@
 import React from "react";
 import PagePagination from "rc-pagination";
+import localeInfo from "rc-pagination/lib/locale/en_US";
 import "rc-pagination/assets/index.css";
+
 import PropTypes from "prop-types";
 
 // Pagination container
@@ -16,7 +18,10 @@ const Pagination = props => (
       onChange={props.onPageChange}
       current={props.pageNumber}
       total={props.totalResults}
+      showLessItems
+      locale={localeInfo}
     />
+
     <div>
       <p>{props.totalResults} Users</p>
     </div>

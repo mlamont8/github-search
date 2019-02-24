@@ -11,6 +11,7 @@
     "rc-pagination": "^1.17.8",
     "react": "^16.8.2",
     "react-dom": "^16.8.2",
+    "react-js-pagination": "^3.0.2",
     "react-scripts": "2.1.5"
   },
   "scripts": {
