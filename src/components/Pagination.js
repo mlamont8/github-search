@@ -18,6 +18,7 @@ const Pagination = props => (
       onChange={props.onPageChange}
       current={props.pageNumber}
       total={props.totalResults}
+      pageSize={12}
       showLessItems
       locale={localeInfo}
     />
