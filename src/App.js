@@ -26,23 +26,27 @@ class App extends Component {
     this.newSearch = this.newSearch.bind(this);
   }
 
-  // On Pagination page change, make sure pageNumber in state is updated before
-  // proceeding with search
-  async onPageChange(page) {
-    await this.setState({
-      pageNumber: page
-    });
-    this.handleSearch(this.state.searchTerm);
+  // On Pagination page change, pageNumber in state is updated before
+  // proceeding with search using callback from setState
+  onPageChange(page) {
+    this.setState(
+      {
+        pageNumber: page
+      },
+      () => this.handleSearch(this.state.searchTerm)
+    );
   }
 
-  // Make sure the page number is reset
-  // for each new search
-  async newSearch(searchTerm) {
-    await this.setState({
-      pageNumber: 1,
-      apiError: false
-    });
-    this.handleSearch(searchTerm);
+  // Page number is reset for each new search
+  // before performing handleSearch from setState's callback
+  newSearch(searchTerm) {
+    this.setState(
+      {
+        pageNumber: 1,
+        apiError: false
+      },
+      () => this.handleSearch(searchTerm)
+    );
   }
 
   async handleSearch(result) {
