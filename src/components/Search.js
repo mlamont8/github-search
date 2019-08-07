@@ -23,6 +23,12 @@ class Search extends React.Component {
 
   // Validate search terms that are entered
   // If correct, update state on App.js via handleSearch method
+  /* 
+    May only contain alphanumeric characters or hyphens.
+    Cannot have multiple consecutive hyphens.
+    Cannot begin or end with a hyphen.
+    Maximum is 39 characters.
+    */
   validateTerm(e) {
     e.preventDefault();
     this.setState({ errors: {} });

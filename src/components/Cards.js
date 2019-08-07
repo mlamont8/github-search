@@ -25,7 +25,6 @@ class Cards extends React.Component {
   // To reset state when there is a page change or
   // new search
   componentDidUpdate(prevProps) {
-    console.log("componentdidupdate");
     if (this.props.login !== prevProps.login) {
       this.setState({
         name: "",
@@ -41,7 +40,7 @@ class Cards extends React.Component {
     const url = `${this.props.url}`;
     try {
       const response = await axios.get(url);
-      await this.setState({
+      this.setState({
         name: response.data.name,
         company: response.data.company,
         bio: response.data.bio,
@@ -62,7 +61,7 @@ class Cards extends React.Component {
               <img src={this.props.avatar} alt={this.props.login} />
             </div>
             <div className="cardTopRight">
-            <Typography>Score:</Typography>
+              <Typography>Score:</Typography>
               <Typography>{this.props.score}</Typography>
             </div>
           </div>
