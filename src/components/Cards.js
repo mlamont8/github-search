@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Card from "@material-ui/core/Card";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
@@ -9,95 +9,83 @@ import PropTypes from "prop-types";
 
 // Child of Results.js
 
-class Cards extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      data: {}
-    };
-    this.moreInfo = this.moreInfo.bind(this);
-  }
+function Cards(props) {
+  const [data, setData] = useState({});
+  const [getMore, setGetMore] = useState(false);
 
-  // To reset state when there is a page change or
-  // new search
-  componentDidUpdate(prevProps) {
-    if (this.props.login !== prevProps.login) {
-      this.setState({
-        data: {}
-      });
+  useEffect(() => {
+    async function fetchData() {
+      const result = await axios(props.url);
+      setData(result.data);
+      setGetMore(false);
     }
-  }
 
-  async moreInfo() {
-    const url = `${this.props.url}`;
-    try {
-      const response = await axios.get(url);
-      console.log(response.data);
-      this.setState({
-        data: response.data
-      });
-    } catch (error) {
-      console.error(error);
+    // To avoid fetching on initial render
+    // fetch only when user has clicked button
+    // which toggles getMore to true
+    if (getMore) {
+      fetchData();
     }
-  }
+  }, [getMore]);
 
-  render() {
-    const { name, company, followers, repo, bio } = this.state.data;
-    const { login, avatar, html_url, score } = this.props;
+  const { login, avatar, html_url, score } = props;
 
-    return (
-      <Card className="cardContainer">
-        <CardContent>
-          <div className="topCardContainer">
-            <div className="cardImage">
-              <img src={avatar} alt={login} />
-            </div>
-            <div className="cardTopRight">
-              <Typography>Score:</Typography>
-              <Typography>{score}</Typography>
-            </div>
+  return (
+    <Card className="cardContainer">
+      <CardContent>
+        <div className="topCardContainer">
+          <div className="cardImage">
+            <img src={avatar} alt={login} />
           </div>
-          <Typography
-            className="loginName"
-            gutterBottom
-            variant="h5"
-            component="h2"
-          >
-            {login}
-          </Typography>
-        </CardContent>
-        <CardActions>
-          <Button size="small" color="primary" onClick={this.moreInfo}>
-            More info
-          </Button>
+          <div className="cardTopRight">
+            <Typography>Score:</Typography>
+            <Typography>{score}</Typography>
+          </div>
+        </div>
+        <Typography
+          className="loginName"
+          gutterBottom
+          variant="h5"
+          component="h2"
+        >
+          {login}
+        </Typography>
+      </CardContent>
+      <CardActions>
+        <Button size="small" color="primary" onClick={() => setGetMore(true)}>
+          More info
+        </Button>
 
-          <a
-            className="cardLink"
-            href={html_url}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Button size="small" color="primary">
-              Github Page
-            </Button>
-          </a>
-        </CardActions>
-        <CardContent className="moreCardContent">
-          <Typography variant="h6">{name}</Typography>
-          <Typography>{company}</Typography>
-          <Typography className="cardBio">{bio}</Typography>
-          <Typography className="bottomCard">
-            <span className={!followers ? " hide" : " show"}>
-              Followers: {followers}
-            </span>
-            {"  "}
-            <span className={!repo ? " hide" : " show"}>Repos: {repo}</span>
-          </Typography>
-        </CardContent>
-      </Card>
-    );
-  }
+        <a
+          className="cardLink"
+          href={html_url}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <Button size="small" color="primary">
+            Github Page
+          </Button>
+        </a>
+      </CardActions>
+
+      <CardContent className="moreCardContent">
+        <Typography variant="h6">{data.name}</Typography>
+        <Typography>{data.company}</Typography>
+        <Typography className="cardBio">{data.bio}</Typography>
+        <div className="bottomCard">
+          <div className={!data.followers ? " hide" : " show"}>
+            Followers: {data.followers}
+          </div>
+
+          <div className={!data.public_repos ? " hide" : " show"}>
+            Repos: {data.public_repos}
+          </div>
+        </div>
+      </CardContent>
+    </Card>
+  );
 }
+
 export default Cards;
 
 Cards.propTypes = {
