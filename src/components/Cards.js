@@ -13,11 +13,7 @@ class Cards extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: "",
-      company: "",
-      bio: "",
-      followers: "",
-      repo: ""
+      data: {}
     };
     this.moreInfo = this.moreInfo.bind(this);
   }
@@ -27,11 +23,7 @@ class Cards extends React.Component {
   componentDidUpdate(prevProps) {
     if (this.props.login !== prevProps.login) {
       this.setState({
-        name: "",
-        company: "",
-        bio: "",
-        followers: "",
-        repo: ""
+        data: {}
       });
     }
   }
@@ -40,12 +32,9 @@ class Cards extends React.Component {
     const url = `${this.props.url}`;
     try {
       const response = await axios.get(url);
+      console.log(response.data);
       this.setState({
-        name: response.data.name,
-        company: response.data.company,
-        bio: response.data.bio,
-        followers: response.data.followers,
-        repo: response.data.public_repos
+        data: response.data
       });
     } catch (error) {
       console.error(error);
@@ -53,16 +42,19 @@ class Cards extends React.Component {
   }
 
   render() {
+    const { name, company, followers, repo, bio } = this.state.data;
+    const { login, avatar, html_url, score } = this.props;
+
     return (
       <Card className="cardContainer">
         <CardContent>
           <div className="topCardContainer">
             <div className="cardImage">
-              <img src={this.props.avatar} alt={this.props.login} />
+              <img src={avatar} alt={login} />
             </div>
             <div className="cardTopRight">
               <Typography>Score:</Typography>
-              <Typography>{this.props.score}</Typography>
+              <Typography>{score}</Typography>
             </div>
           </div>
           <Typography
@@ -71,7 +63,7 @@ class Cards extends React.Component {
             variant="h5"
             component="h2"
           >
-            {this.props.login}
+            {login}
           </Typography>
         </CardContent>
         <CardActions>
@@ -81,7 +73,7 @@ class Cards extends React.Component {
 
           <a
             className="cardLink"
-            href={this.props.html_url}
+            href={html_url}
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -91,17 +83,15 @@ class Cards extends React.Component {
           </a>
         </CardActions>
         <CardContent className="moreCardContent">
-          <Typography variant="h6">{this.state.name}</Typography>
-          <Typography>{this.state.company}</Typography>
-          <Typography className="cardBio">{this.state.bio}</Typography>
+          <Typography variant="h6">{name}</Typography>
+          <Typography>{company}</Typography>
+          <Typography className="cardBio">{bio}</Typography>
           <Typography className="bottomCard">
-            <span className={!this.state.followers ? " hide" : " show"}>
-              Followers: {this.state.followers}
+            <span className={!followers ? " hide" : " show"}>
+              Followers: {followers}
             </span>
             {"  "}
-            <span className={!this.state.repo ? " hide" : " show"}>
-              Repos: {this.state.repo}
-            </span>
+            <span className={!repo ? " hide" : " show"}>Repos: {repo}</span>
           </Typography>
         </CardContent>
       </Card>
