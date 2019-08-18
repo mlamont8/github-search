@@ -33,7 +33,8 @@ class App extends Component {
   onPageChange(page) {
     this.setState(
       {
-        pageNumber: page
+        pageNumber: page,
+        reset: true
       },
       () => this.handleSearch(this.state.searchTerm)
     );
