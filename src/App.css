@@ -55,7 +55,7 @@ main {
   text-transform: uppercase;
 }
 
-.errorContainer p {
+.errorContainer {
   text-align: center;
   color: red;
   font-style: italic;

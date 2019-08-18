@@ -20,7 +20,7 @@ function Cards(props) {
       setGetMore(false);
     }
 
-    // To avoid fetching on initial render
+    // To avoid fetching after initial render
     // fetch only when user has clicked button
     // which toggles getMore to true
     if (getMore) {

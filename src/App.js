@@ -24,6 +24,7 @@ class App extends Component {
     this.handleSearch = this.handleSearch.bind(this);
     this.onPageChange = this.onPageChange.bind(this);
     this.newSearch = this.newSearch.bind(this);
+    this.handleReset = this.handleReset.bind(this);
   }
 
   // On Pagination page change, pageNumber in state is updated before
@@ -69,13 +70,17 @@ class App extends Component {
     }
   }
 
+  handleReset() {
+    this.setState({ gridData: null, totalResults: 0 });
+  }
+
   render() {
     return (
       <div className="App">
         <CssBaseline />
         <Appbar />
         <main>
-          <Search newSearch={this.newSearch} />
+          <Search newSearch={this.newSearch} reset={this.handleReset} />
           <Pagination
             resultsPerPage={this.state.resultsPerPage}
             totalResults={this.state.totalResults}
