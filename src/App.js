@@ -18,7 +18,8 @@ class App extends Component {
       gridData: null,
       totalResults: 0,
       resultsPerPage: 12,
-      apiError: false
+      apiError: false,
+      reset: false
     };
 
     this.handleSearch = this.handleSearch.bind(this);
@@ -44,7 +45,8 @@ class App extends Component {
     this.setState(
       {
         pageNumber: 1,
-        apiError: false
+        apiError: false,
+        reset: true
       },
       () => this.handleSearch(searchTerm)
     );
@@ -60,7 +62,8 @@ class App extends Component {
       this.setState({
         gridData: response.data.items,
         searchTerm: result,
-        totalResults: response.data.total_count
+        totalResults: response.data.total_count,
+        reset: false
       });
     } catch (error) {
       console.error(error);
@@ -71,7 +74,7 @@ class App extends Component {
   }
 
   handleReset() {
-    this.setState({ gridData: null, totalResults: 0 });
+    this.setState({ gridData: null, totalResults: 0, reset: true });
   }
 
   render() {
@@ -91,6 +94,7 @@ class App extends Component {
           <Results
             gridData={this.state.gridData}
             apiError={this.state.apiError}
+            reset={this.state.reset}
           />
         </main>
         <footer>

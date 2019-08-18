@@ -18,6 +18,7 @@ const Results = props => {
                 id={data.id}
                 html_url={data.html_url}
                 url={data.url}
+                reset={props.reset}
               />
             </Grid>
           ))}
@@ -33,5 +34,6 @@ export default Results;
 
 Results.propTypes = {
   gridData: PropTypes.array,
-  apiError: PropTypes.bool
+  apiError: PropTypes.bool,
+  reset: PropTypes.bool
 };

@@ -28,6 +28,10 @@ function Cards(props) {
     }
   }, [getMore]);
 
+  useEffect(() => {
+    setData({});
+  }, [props.reset]);
+
   const { login, avatar, html_url, score } = props;
 
   return (

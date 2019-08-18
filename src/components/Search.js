@@ -10,7 +10,6 @@ function Search(props) {
   const { register, handleSubmit, reset, errors } = useForm();
 
   const onSubmit = (data, e) => {
-    console.log(data);
     props.newSearch(data.searchField);
     e.target.reset();
   };
@@ -19,8 +18,6 @@ function Search(props) {
     reset();
     props.reset();
   };
-
-  console.log(errors);
 
   return (
     <div className="searchContainer">
