@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import Appbar from "./components/Appbar";
 import Pagination from "./components/Pagination";
 import Search from "./components/Search";
@@ -9,101 +9,70 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 
 import "./App.css";
 
-class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      searchTerm: "",
-      pageNumber: 1,
-      gridData: null,
-      totalResults: 0,
-      resultsPerPage: 12,
-      apiError: false,
-      reset: false
-    };
+function App() {
+  const [searchTerm, setSearchTerm] = useState(null);
+  const [pageNumber, setPageNumber] = useState(1);
+  const [apiData, setApiData] = useState({});
+  const [totalResults, setTotalResults] = useState(0);
+  const [resultsPerPage] = useState(12);
+  const [apiError, setApiError] = useState(false);
+  const [reset, setReset] = useState(false);
 
-    this.handleSearch = this.handleSearch.bind(this);
-    this.onPageChange = this.onPageChange.bind(this);
-    this.newSearch = this.newSearch.bind(this);
-    this.handleReset = this.handleReset.bind(this);
+  function onPageChange(page) {
+    const url = `https://api.github.com/search/users?q=${searchTerm}&page=${page}&per_page=12`;
+
+    setPageNumber(page);
+    setReset(true);
+    apiCall(url);
   }
 
-  // On Pagination page change, pageNumber in state is updated before
-  // proceeding with search using callback from setState
-  onPageChange(page) {
-    this.setState(
-      {
-        pageNumber: page,
-        reset: true
-      },
-      () => this.handleSearch(this.state.searchTerm)
-    );
+  function newSearch(term) {
+    setSearchTerm(term);
+    const url = `https://api.github.com/search/users?q=${term}&page=1&per_page=12`;
+
+    setApiError(false);
+    setReset(true);
+    setPageNumber(1);
+    apiCall(url);
   }
 
-  // Page number is reset for each new search
-  // before performing handleSearch from setState's callback
-  newSearch(searchTerm) {
-    this.setState(
-      {
-        pageNumber: 1,
-        apiError: false,
-        reset: true
-      },
-      () => this.handleSearch(searchTerm)
-    );
-  }
-
-  async handleSearch(result) {
-    const url = `https://api.github.com/search/users?q=${result}&page=${
-      this.state.pageNumber
-    }&per_page=${this.state.resultsPerPage}`;
-
+  async function apiCall(url) {
     try {
-      const response = await axios.get(url);
-      this.setState({
-        gridData: response.data.items,
-        searchTerm: result,
-        totalResults: response.data.total_count,
-        reset: false
-      });
+      const res = await axios(url);
+      setApiData(res.data);
+      setTotalResults(res.data.total_count);
+      setReset(false);
     } catch (error) {
-      console.error(error);
-      this.setState({
-        apiError: true
-      });
+      setApiError(true);
     }
   }
 
-  handleReset() {
-    this.setState({ gridData: null, totalResults: 0, reset: true });
+  function handleReset() {
+    setApiData({});
+    setTotalResults(0);
+    setReset(true);
   }
 
-  render() {
-    return (
-      <div className="App">
-        <CssBaseline />
-        <Appbar />
-        <main>
-          <Search newSearch={this.newSearch} reset={this.handleReset} />
-          <Pagination
-            resultsPerPage={this.state.resultsPerPage}
-            totalResults={this.state.totalResults}
-            pageNumber={this.state.pageNumber}
-            onPageChange={this.onPageChange}
-          />
+  return (
+    <div className="App">
+      <CssBaseline />
+      <Appbar />
+      <main>
+        <Search newSearch={newSearch} reset={handleReset} />
+        <Pagination
+          resultsPerPage={resultsPerPage}
+          totalResults={totalResults}
+          pageNumber={pageNumber}
+          onPageChange={onPageChange}
+        />
 
-          <Results
-            gridData={this.state.gridData}
-            apiError={this.state.apiError}
-            reset={this.state.reset}
-          />
-        </main>
-        <footer>
-          <Footer />
-        </footer>
-      </div>
-    );
-  }
+        <Results gridData={apiData.items} apiError={apiError} reset={reset} />
+      </main>
+      <footer>
+        <Footer />
+      </footer>
+    </div>
+  );
 }
 
 export default App;

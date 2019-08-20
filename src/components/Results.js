@@ -5,6 +5,7 @@ import EmptyPage from "./EmptyPage";
 import PropTypes from "prop-types";
 
 const Results = props => {
+  // console.log("props", props);
   return (
     <div>
       {props.gridData ? (
