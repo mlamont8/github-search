@@ -44,9 +44,10 @@ function Search(props) {
             <form className="search-form" onSubmit={handleSubmit(onSubmit)}>
               <TextField
                 id="search-field"
-                label="Search Users"
+                label="Search"
                 className="search-field"
                 name="searchField"
+                helperText="Github Username"
                 inputRef={register({
                   required: "Empty searches are not allowed",
                   minLength: {
@@ -60,17 +61,19 @@ function Search(props) {
                 })}
                 margin="normal"
               />
-              <Button
-                type="submit"
-                value="Submit"
-                color="primary"
-                variant="contained"
-              >
-                Search
-              </Button>
-              <Button onClick={onReset} color="primary" variant="contained">
-                Reset
-              </Button>
+              <div>
+                <Button
+                  type="submit"
+                  value="Submit"
+                  color="primary"
+                  variant="contained"
+                >
+                  Search
+                </Button>
+                <Button onClick={onReset} color="primary" variant="contained">
+                  Reset
+                </Button>
+              </div>
             </form>
           </Grid>
         </Grid>
